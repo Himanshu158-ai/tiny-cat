@@ -1,6 +1,7 @@
 import express from 'express'
-import guardx from "guardx-rate-limit";
 const app = express();
+import guardx from "guardx-rate-limit";
+import catRoutes from './routes/cats.routes.js';
 
 
 app.use(express.json());
@@ -22,6 +23,7 @@ app.get("/health",(req,res)=>{
     })
 })
 
-
+// cat routes
+app.use('/api/cat',catRoutes);
 
 export default app;
