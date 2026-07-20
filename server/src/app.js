@@ -14,4 +14,14 @@ app.use(
 );
 
 
+// health route
+app.get("/health",(req,res)=>{
+    res.json({
+        staus:true,
+        message:"Cat succesfully fetched..."
+    })
+})
+
+
+
 export default app;
