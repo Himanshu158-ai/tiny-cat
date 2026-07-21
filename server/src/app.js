@@ -1,11 +1,14 @@
 import express from 'express'
 const app = express();
 import guardx from "guardx-rate-limit";
+import cors from "cors";
 import catRoutes from './routes/cats.routes.js';
 import { generateResponse } from './services/gemini.service.js';
+import aiRoutes from './routes/ai.routes.js';
 
 
 app.use(express.json());
+app.use(cors());
 
 //rate limiting
 app.use(
@@ -28,11 +31,6 @@ app.get("/health", (req, res) => {
 app.use('/api/cat', catRoutes);
 
 // ai routes
-app.post("/api/ai", async(req, res) => {
-    const data = await generateResponse("who is virat kohli?");
-    return res.json({
-        data
-    })
-})
+app.use("/api/ai", aiRoutes);
 
 export default app;
