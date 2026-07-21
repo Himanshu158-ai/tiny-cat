@@ -8,7 +8,7 @@ export const createCat = async (req, res) => {
         return res.status(201).json({
             status: true,
             message: "Cat created successfully",
-            cat
+            data: cat
         });
 
     } catch (error) {
@@ -25,7 +25,7 @@ export const getAllCats = async (req, res) => {
         return res.status(200).json({
             status: true,
             message: "Fetched all cats",
-            cats
+            data: cats
         })
     } catch (error) {
         return res.status(500).json({
@@ -51,7 +51,7 @@ export const getCat = async (req, res) => {
             return res.status(404).json({
                 status: false,
                 message: "Cat not found",
-                cat
+                data: cat
             })
         }
 
@@ -63,6 +63,27 @@ export const getCat = async (req, res) => {
 
     } catch (error) {
         return res.status(500).json({
+            status: false,
+            message: error.message
+        })
+    }
+}
+
+export const recommendCat = async (req, res) => {
+
+    try {
+        const { kidsFriendly, apartmentFriendly } = req.body;
+        const cats = await catModel.find({
+            kidsFriendly,
+            apartmentFriendly
+        })
+        res.status(200).json({
+            status: true,
+            message: "Recommended cats",
+            data: cats,
+        })
+    } catch (error) {
+        res.status(500).json({
             status: false,
             message: error.message
         })
