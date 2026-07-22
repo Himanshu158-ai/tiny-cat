@@ -72,7 +72,7 @@ export const getCat = async (req, res) => {
 export const recommendCat = async (req, res) => {
 
     try {
-        const { kidsFriendly, apartmentFriendly } = req.body;
+        const { kidsFriendly = false, apartmentFriendly = false } = req.body;
         const cats = await catModel.find({
             kidsFriendly,
             apartmentFriendly
