@@ -5,6 +5,7 @@ import cors from "cors";
 import catRoutes from './routes/cats.routes.js';
 import { generateResponse } from './services/gemini.service.js';
 import aiRoutes from './routes/ai.routes.js';
+import aiRecommendRoutes from './routes/ai.recommend.routes.js';
 
 
 app.use(express.json());
@@ -32,5 +33,8 @@ app.use('/api/cat', catRoutes);
 
 // ai routes
 app.use("/api/ai", aiRoutes);
+
+// ai recommend routes
+app.use("/api/ai/recommend", aiRecommendRoutes);
 
 export default app;
